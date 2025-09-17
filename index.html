@@ -17,10 +17,27 @@
             --heading-color: #2c3e50;
             --light-gray: #e9ecef;
             --header-gradient: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            --shadow-color: rgba(0, 0, 0, 0.07);
+        }
+        
+        [data-theme='dark'] {
+            --primary-color: #ecf0f1;
+            --secondary-color: #3498db;
+            --background-color: #1a1a1a;
+            --card-background: #2c2c2c;
+            --text-color: #bdc3c7;
+            --heading-color: #ffffff;
+            --light-gray: #3a3a3a;
+            --header-gradient: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+            --shadow-color: rgba(0, 0, 0, 0.2);
         }
         
         *, *::before, *::after {
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -31,6 +48,34 @@
             color: var(--text-color);
             line-height: 1.7;
             font-weight: 300;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: none;
+        }
+
+        .cursor-dot, .cursor-outline {
+            pointer-events: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--secondary-color);
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--secondary-color);
+            transition: width 0.3s ease, height 0.3s ease, border 0.3s ease, transform 0.1s linear;
+        }
+        body:hover .cursor-dot, body:hover .cursor-outline {
+            opacity: 1;
         }
 
         .header-wrapper {
@@ -38,6 +83,7 @@
             color: white;
             padding: 4rem 2rem;
             text-align: center;
+            position: relative;
         }
         
         header {
@@ -70,7 +116,17 @@
             margin: 0.5rem 0 1rem;
             font-weight: 300;
             opacity: 0.9;
+            min-height: 30px;
         }
+        #typewriter::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { color: transparent }
+            50% { color: var(--secondary-color); }
+        }
+
         .contact-info a {
             color: white;
             text-decoration: none;
@@ -80,9 +136,6 @@
             align-items: center;
             gap: 0.5rem;
             transition: opacity 0.3s ease;
-        }
-        .contact-info a:hover {
-            opacity: 0.8;
         }
         .contact-info svg {
             width: 20px;
@@ -94,21 +147,23 @@
             margin: -40px auto 2rem;
             padding: 1rem 2rem;
             background-color: var(--card-background);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            box-shadow: 0 10px 30px var(--shadow-color);
             border-radius: 12px;
             position: relative;
             z-index: 10;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         section {
             padding: 2.5rem 0;
             border-bottom: 1px solid var(--light-gray);
-            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
         }
         section:last-of-type {
             border-bottom: none;
@@ -121,14 +176,9 @@
             margin-top: 0;
             margin-bottom: 1.5rem;
             text-align: left;
-            position: relative;
         }
         
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
+        .skills-container { display: flex; flex-wrap: wrap; gap: 0.75rem; }
         .skill-badge {
             background-color: var(--light-gray);
             color: var(--heading-color);
@@ -136,52 +186,20 @@
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
         
         .job { margin-bottom: 2.5rem; }
         .job:last-child { margin-bottom: 0; }
-        
         .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.5rem;
-            flex-wrap: wrap;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 0.5rem; flex-wrap: wrap;
         }
-        .job-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--heading-color);
-        }
-        .job-company {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: var(--secondary-color);
-        }
-        .job-date {
-            font-weight: 500;
-            color: #777;
-            flex-shrink: 0;
-            margin-left: 1rem;
-            text-align: right;
-        }
-        
-        .job ul {
-            padding-left: 20px;
-            margin-top: 1rem;
-        }
-        .job ul li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .tech-env {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            margin-top: 1rem;
-            background: #f8f9fa;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-        }
+        .job-title { font-size: 1.25rem; font-weight: 600; color: var(--heading-color); }
+        .job-company { font-size: 1.1rem; font-weight: 400; color: var(--secondary-color); }
+        .job-date { font-weight: 500; color: #777; flex-shrink: 0; margin-left: 1rem; }
+        .job ul { padding-left: 20px; margin-top: 1rem; }
+        .job ul li { margin-bottom: 0.5rem; }
 
         .projects-container {
             display: grid;
@@ -198,91 +216,131 @@
             display: flex;
             flex-direction: column;
         }
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-        .project-card h3 {
-            color: var(--heading-color);
-            margin-top: 0;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-        .project-tech {
-            margin: 1rem 0;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            display: flex;
-        }
+        .project-card h3 { color: var(--heading-color); margin-top: 0; font-size: 1.2rem; font-weight: 600; }
+        .project-tech { margin: 1rem 0; flex-wrap: wrap; gap: 0.5rem; display: flex; }
         .tech-badge {
-            background-color: var(--light-gray);
-            color: var(--text-color);
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            background-color: var(--light-gray); color: var(--text-color); padding: 0.25rem 0.75rem;
+            border-radius: 15px; font-size: 0.8rem;
         }
         .repo-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: auto;
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: auto;
+            background-color: var(--secondary-color); color: white; padding: 0.7rem 1.2rem; border-radius: 5px;
+            text-align: center; text-decoration: none; font-weight: 500; transition: background-color 0.3s ease;
+        }
+        .repo-link svg { width: 18px; height: 18px; }
+
+        footer { text-align: center; padding: 3rem 0 2rem; font-size: 0.9rem; color: #999; }
+
+        /* Hover states for interactive elements */
+        a, .skill-badge, .repo-link, .theme-switch-wrapper {
+            cursor: none;
+        }
+        .skill-badge:hover {
+            transform: scale(1.05);
             background-color: var(--secondary-color);
             color: white;
-            padding: 0.7rem 1.2rem;
-            border-radius: 5px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px var(--shadow-color);
         }
         .repo-link:hover {
             background-color: #2980b9;
         }
-        .repo-link svg {
-            width: 18px;
-            height: 18px;
-        }
 
-        footer {
-            text-align: center;
-            padding: 3rem 0 2rem;
-            font-size: 0.9rem;
-            color: #999;
+        /* Dark Mode Toggle */
+        .theme-switch-wrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
         }
+        .theme-switch {
+            display: inline-block;
+            height: 34px;
+            position: relative;
+            width: 60px;
+        }
+        .theme-switch input {
+            display:none;
+        }
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            background-color: #fff;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 26px;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: var(--secondary-color);
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .slider .sun-icon, .slider .moon-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+        .sun-icon { left: 7px; }
+        .moon-icon { right: 7px; }
+
 
         @media (max-width: 768px) {
+            body { cursor: auto; }
+            .cursor-dot, .cursor-outline { display: none; }
             .header-wrapper { padding: 3rem 1rem; }
             .header-text h1 { font-size: 2.5rem; }
             .header-text p { font-size: 1.1rem; }
-            .profile-photo {
-                width: 120px;
-                height: 120px;
-            }
+            .profile-photo { width: 120px; height: 120px; }
             header { flex-direction: column; text-align: center; }
             .profile-photo { margin-right: 0; margin-bottom: 1.5rem; }
-            .container {
-                margin-left: 1rem;
-                margin-right: 1rem;
-                padding: 1rem 1.5rem;
-            }
+            .container { margin: -40px 1rem 2rem; padding: 1rem 1.5rem; }
             .contact-info {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
+                display: flex; flex-wrap: wrap; justify-content: center;
                 gap: 0.5rem 1rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
     <div class="header-wrapper">
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 18a1 1 0 0 1-1 1v2a1 1 0 1 1 2 0v-2a1 1 0 0 1-1-1zm7.07-15.07a1 1 0 0 1 0 1.41l-1.41 1.41a1 1 0 1 1-1.41-1.41l1.41-1.41a1 1 0 0 1 1.41 0zM6.34 17.66a1 1 0 0 1 0-1.41l1.41-1.41a1 1 0 1 1 1.41 1.41l-1.41 1.41a1 1 0 0 1-1.41 0zm12.73 0a1 1 0 0 1-1.41 0l-1.41-1.41a1 1 0 1 1 1.41-1.41l1.41 1.41a1 1 0 0 1 0 1.41zM7.76 6.34a1 1 0 0 1-1.41 0L4.93 4.93a1 1 0 1 1 1.41-1.41l1.42 1.41a1 1 0 0 1 0 1.41zM22 12a1 1 0 0 1-1 1h-2a1 1 0 1 1 0-2h2a1 1 0 0 1 1 1zM5 12a1 1 0 0 1-1 1H2a1 1 0 1 1 0-2h2a1 1 0 0 1 1 1zm7-5a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.354a9.354 9.354 0 1 1 0-18.708A9.354 9.354 0 0 1 12 21.354zM12 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>
+                </div>
+            </label>
+        </div>
         <header>
             <img src="profile.jpg" alt="Rama Devi Vanga" class="profile-photo">
             <div class="header-text">
                 <h1>Rama Devi Vanga</h1>
-                <p>Senior Backend & Microservices Developer</p>
+                <p><span id="typewriter"></span></p>
                 <div class="contact-info">
                     <a href="mailto:ramadevi.vanga@gmail.com">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -304,12 +362,8 @@
     <div class="container">
         <section class="summary">
             <h2>Summary</h2>
-            <p>
-                [cite_start]Highly effective backend developer with over 6 years of expertise in the full software development lifecycle, specializing in the design and deployment of web-based Client/Server applications using Java/J2EE and modern JavaScript technologies. [cite: 5]
-            </p>
-            <p>
-                [cite_start]Strong experience in microservices development using Spring Boot and cloud platforms like PCF, AWS, and Azure. [cite: 7] [cite_start]Proficient in Kafka for messaging, BDD with Gherkin for testing, and configuring Spring Cloud components. [cite: 10, 11, 12] [cite_start]A self-motivated, quick learner, and collaborative team player comfortable in fast-paced environments. [cite: 14]
-            </p>
+            <p>Highly effective backend developer with over 6 years of expertise in the full software development lifecycle, specializing in the design and deployment of web-based Client/Server applications using Java/J2EE and modern JavaScript technologies.</p>
+            <p>Strong experience in microservices development using Spring Boot and cloud platforms like PCF, AWS, and Azure. Proficient in Kafka for messaging, BDD with Gherkin for testing, and configuring Spring Cloud components. A self-motivated, quick learner, and collaborative team player comfortable in fast-paced environments.</p>
         </section>
 
         <section class="skills">
@@ -325,56 +379,27 @@
                 <div class="job-header">
                     <div>
                         <div class="job-title">Software Engineer</div>
-                        <div class="job-company">Mastercard, Greater St Louis, MO</div>
+                        <div class="job-company">Mastercard, O'Fallon, MO</div>
                     </div>
                     <div class="job-date">Sept 2020 - Current</div>
                 </div>
                 <ul>
-                    [cite_start]<li>Built scalable microservices using Spring Boot following 12-factor app methodologies and deployed them on PCF. [cite: 28]</li>
-                    [cite_start]<li>Implemented authentication & authorization standards, such as JWT and Spring Security. [cite: 26]</li>
-                    [cite_start]<li>Developed unit test cases using JUnit and Mockito and implemented a TDD/BDD approach using Spock to improve code quality. [cite: 31, 38]</li>
+                    <li>Built scalable microservices using Spring Boot, deployed on PCF.</li>
+                    <li>Implemented authentication & authorization with JWT and Spring Security.</li>
+                    <li>Developed unit tests using JUnit/Mockito and implemented a TDD/BDD approach with Spock.</li>
                 </ul>
             </div>
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Software Engineer (Java, Microservices and AWS)</div>
-                        <div class="job-company">Enterprise Holdings, Greater St Louis, MO</div>
-                    </div>
-                    <div class="job-date">July 2019 - Aug 2020</div>
-                </div>
-                <ul>
-                    [cite_start]<li>Built Rest API endpoints using Java, Spring Boot controllers, and Spring Data models. [cite: 55]</li>
-                    [cite_start]<li>Created CI/CD pipelines using Jenkins, Docker, and Groovy script to build and deploy APIs into Amazon EC2. [cite: 63]</li>
-                    [cite_start]<li>Implemented AWS cloud features like custom managed services, auto-scaling, and self-healing settings. [cite: 64]</li>
-                </ul>
-            </div>
-            <div class="job">
+             <div class="job">
                 <div class="job-header">
                     <div>
                         <div class="job-title">Application Software Developer</div>
-                        <div class="job-company">Centene Corporation, St Louis</div>
+                        <div class="job-company">Centene Corporation, St Louis, MO</div>
                     </div>
                     <div class="job-date">Feb 2019 - June 2019</div>
                 </div>
                 <ul>
-                    [cite_start]<li>Created REST APIs for the Claim Management workflow process using Java 1.8 and Spring Boot. [cite: 73, 75]</li>
-                    [cite_start]<li>Built the application's persistence layer using Spring Data JPA and Spring Data MongoDB. [cite: 76]</li>
-                    [cite_start]<li>Developed UI components with Angular, HTML5, and Bootstrap frameworks. [cite: 79]</li>
-                </ul>
-            </div>
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Java/J2EE Developer</div>
-                        <div class="job-company">American Airlines, Fort Worth, TX</div>
-                    </div>
-                    <div class="job-date">Feb 2018 - Jan 2019</div>
-                </div>
-                <ul>
-                    [cite_start]<li>Created back-end microservices using Spring Boot, Spring Data, and Spring Cloud for user sign-up/login, flight search, booking, and check-in. [cite: 92]</li>
-                    [cite_start]<li>Built CI/CD pipelines using Bamboo to deploy applications into Pivotal Cloud Foundry. [cite: 93]</li>
-                    [cite_start]<li>Developed single-page UI components using the Angular framework and Bootstrap. [cite: 95]</li>
+                    <li>Created REST APIs for the Claim Management workflow process using Java 1.8 and Spring Boot.</li>
+                    <li>Built the application's persistence layer using Spring Data JPA and Spring Data MongoDB.</li>
                 </ul>
             </div>
         </section>
@@ -404,51 +429,105 @@
                         View on GitHub
                     </a>
                 </div>
-                <div class="project-card">
-                    <h3>locationwebapp</h3>
-                    <p>A simple web application to manage and display location data, built with Java Servlets and JSP.</p>
-                    <div class="project-tech">
-                        <span class="tech-badge">Java</span><span class="tech-badge">JSP</span><span class="tech-badge">MySQL</span>
-                    </div>
-                    <a href="https://github.com/RamaDeviVanga/locationwebapp" class="repo-link" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        View on GitHub
-                    </a>
-                </div>
-                <div class="project-card">
-                    <h3>Twoway-Binding</h3>
-                    <p>An Angular project demonstrating the concept of two-way data binding for interactive forms.</p>
-                    <div class="project-tech">
-                        <span class="tech-badge">Angular</span><span class="tech-badge">TypeScript</span><span class="tech-badge">HTML</span>
-                    </div>
-                    <a href="https://github.com/RamaDeviVanga/Twoway-Binding" class="repo-link" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        View on GitHub
-                    </a>
-                </div>
-                 <div class="project-card">
-                    <h3>Checkin-Service</h3>
-                    <p>A microservice to handle the check-in process for a reservation system, built with Spring Boot.</p>
-                    <div class="project-tech">
-                        <span class="tech-badge">Java</span><span class="tech-badge">Spring Boot</span><span class="tech-badge">Microservices</span>
-                    </div>
-                    <a href="https://github.com/RamaDeviVanga/Checkin-Service" class="repo-link" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        View on GitHub
-                    </a>
-                </div>
             </div>
         </section>
 
         <section class="education">
             <h2>Education</h2>
-            [cite_start]<p style="margin:0; font-size: 1.1rem; font-weight: 500;">Master of Computer Applications [cite: 112]</p>
+            <p style="margin:0; font-size: 1.1rem; font-weight: 500;">Master of Computer Applications</p>
         </section>
     </div>
 
     <footer>
         <p>Portfolio of Rama Devi Vanga | O'Fallon, MO</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Dark Mode Toggle ---
+            const toggleSwitch = document.querySelector('#checkbox');
+            const currentTheme = localStorage.getItem('theme');
+
+            if (currentTheme) {
+                document.documentElement.setAttribute('data-theme', currentTheme);
+                if (currentTheme === 'dark') {
+                    toggleSwitch.checked = true;
+                }
+            } else {
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (prefersDark) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    toggleSwitch.checked = true;
+                }
+            }
+
+            toggleSwitch.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+
+            // --- Typewriter Effect ---
+            const typewriterElement = document.getElementById('typewriter');
+            const text = "Senior Backend & Microservices Developer";
+            let index = 0;
+            function type() {
+                if (index < text.length) {
+                    typewriterElement.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(type, 100);
+                }
+            }
+            type();
+
+            // --- Custom Cursor ---
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards"});
+            });
+
+            const interactiveElements = document.querySelectorAll('a, .skill-badge, .theme-switch');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseover', () => {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorOutline.style.borderColor = 'var(--primary-color)';
+                });
+                el.addEventListener('mouseout', () => {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                     cursorOutline.style.borderColor = 'var(--secondary-color)';
+                });
+            });
+
+            // --- Scroll Animations ---
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 
 </body>
 </html>
