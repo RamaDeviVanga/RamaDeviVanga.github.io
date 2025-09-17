@@ -4,102 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rama Devi Vanga | Backend Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
-            --background-color: #f4f6f8;
+            --background-color: #f8f9fa;
             --card-background: #ffffff;
-            --text-color: #34495e;
-            --light-gray: #e0e0e0;
+            --text-color: #333;
+            --heading-color: #2c3e50;
+            --light-gray: #e9ecef;
+            --header-gradient: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
         }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--background-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.7;
+            font-weight: 300;
         }
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 1rem 2rem;
-            background-color: var(--card-background);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border-radius: 8px;
+
+        .header-wrapper {
+            background: var(--header-gradient);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
         }
+        
         header {
+            max-width: 900px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--light-gray);
-            flex-wrap: wrap;
             justify-content: center;
+            flex-wrap: wrap;
         }
+
         .profile-photo {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             object-fit: cover;
-            margin-right: 2.5rem;
-            border: 4px solid var(--card-background);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            margin-right: 3rem;
+            border: 5px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
-        .header-text {
-            flex-grow: 1;
-        }
+
         .header-text h1 {
-            font-size: 2.8rem;
-            color: var(--primary-color);
+            font-size: 3rem;
+            font-weight: 700;
             margin: 0;
+            letter-spacing: -1px;
         }
-        .contact-info {
-            margin-top: 0.5rem;
+        .header-text p {
+            font-size: 1.25rem;
+            margin: 0.5rem 0 1rem;
+            font-weight: 300;
+            opacity: 0.9;
         }
         .contact-info a {
-            color: var(--secondary-color);
+            color: white;
             text-decoration: none;
-            margin-right: 1rem;
+            margin: 0 0.75rem;
             font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s ease;
         }
         .contact-info a:hover {
-            text-decoration: underline;
+            opacity: 0.8;
         }
+        .contact-info svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: -40px auto 2rem;
+            padding: 1rem 2rem;
+            background-color: var(--card-background);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            border-radius: 12px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         section {
-            padding: 2rem 0;
+            padding: 2.5rem 0;
             border-bottom: 1px solid var(--light-gray);
+            animation: fadeIn 0.6s ease-out forwards;
         }
         section:last-of-type {
             border-bottom: none;
         }
+        
         h2 {
-            font-size: 1.8rem;
-            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--heading-color);
             margin-top: 0;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--secondary-color);
-            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            position: relative;
         }
+        
         .skills-container {
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
         }
         .skill-badge {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 0.5rem 1rem;
+            background-color: var(--light-gray);
+            color: var(--heading-color);
+            padding: 0.5rem 1.25rem;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
         }
-        .job {
-            margin-bottom: 2rem;
-        }
-        .job:last-child {
-            margin-bottom: 0;
-        }
+        
+        .job { margin-bottom: 2.5rem; }
+        .job:last-child { margin-bottom: 0; }
+        
         .job-header {
             display: flex;
             justify-content: space-between;
@@ -108,21 +149,23 @@
             flex-wrap: wrap;
         }
         .job-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--primary-color);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--heading-color);
         }
         .job-company {
             font-size: 1.1rem;
-            font-style: italic;
+            font-weight: 400;
+            color: var(--secondary-color);
         }
         .job-date {
             font-weight: 500;
-            color: var(--secondary-color);
+            color: #777;
             flex-shrink: 0;
             margin-left: 1rem;
             text-align: right;
         }
+        
         .job ul {
             padding-left: 20px;
             margin-top: 1rem;
@@ -130,13 +173,16 @@
         .job ul li {
             margin-bottom: 0.5rem;
         }
+        
         .tech-env {
             font-size: 0.9rem;
-            font-style: italic;
             color: #7f8c8d;
             margin-top: 1rem;
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
         }
-        /* New Project Section Styles */
+
         .projects-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -144,7 +190,7 @@
             margin-top: 2rem;
         }
         .project-card {
-            background-color: #fdfdfd;
+            background-color: var(--background-color);
             border: 1px solid var(--light-gray);
             border-radius: 8px;
             padding: 1.5rem;
@@ -154,12 +200,13 @@
         }
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
         .project-card h3 {
-            color: var(--primary-color);
+            color: var(--heading-color);
             margin-top: 0;
             font-size: 1.2rem;
+            font-weight: 600;
         }
         .project-tech {
             margin: 1rem 0;
@@ -168,18 +215,21 @@
             display: flex;
         }
         .tech-badge {
-            background-color: var(--background-color);
+            background-color: var(--light-gray);
             color: var(--text-color);
             padding: 0.25rem 0.75rem;
             border-radius: 15px;
             font-size: 0.8rem;
         }
         .repo-link {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
             margin-top: auto;
             background-color: var(--secondary-color);
             color: white;
-            padding: 0.6rem 1rem;
+            padding: 0.7rem 1.2rem;
             border-radius: 5px;
             text-align: center;
             text-decoration: none;
@@ -189,77 +239,66 @@
         .repo-link:hover {
             background-color: #2980b9;
         }
-
-        .education p {
-            margin: 0;
-            font-size: 1.1rem;
+        .repo-link svg {
+            width: 18px;
+            height: 18px;
         }
+
         footer {
             text-align: center;
-            padding: 2rem 0 1rem;
+            padding: 3rem 0 2rem;
             font-size: 0.9rem;
-            color: #7f8c8d;
+            color: #999;
         }
+
         @media (max-width: 768px) {
-            .header-text h1 {
-                font-size: 2.2rem;
-            }
+            .header-wrapper { padding: 3rem 1rem; }
+            .header-text h1 { font-size: 2.5rem; }
+            .header-text p { font-size: 1.1rem; }
             .profile-photo {
                 width: 120px;
                 height: 120px;
-                margin-right: 2rem;
             }
-        }
-        @media (max-width: 600px) {
+            header { flex-direction: column; text-align: center; }
+            .profile-photo { margin-right: 0; margin-bottom: 1.5rem; }
             .container {
-                margin: 0;
-                padding: 1.5rem;
-                border-radius: 0;
-            }
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .profile-photo {
-                margin-right: 0;
-                margin-bottom: 1.5rem;
-            }
-            .header-text {
-                text-align: center;
-            }
-            .job-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .job-date {
-                margin-left: 0;
-                margin-top: 0.25rem;
-                text-align: left;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                padding: 1rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="header-wrapper">
         <header>
             <img src="profile.jpg" alt="Rama Devi Vanga" class="profile-photo">
             <div class="header-text">
                 <h1>Rama Devi Vanga</h1>
+                <p>Senior Backend & Microservices Developer</p>
                 <div class="contact-info">
-                    <a href="mailto:ramadevi.vanga@gmail.com">ramadevi.vanga@gmail.com</a>
-                    <a href="tel:+1-636-544-4966">+1-636-544-4966</a>
+                    <a href="mailto:ramadevi.vanga@gmail.com">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        Email
+                    </a>
+                    <a href="tel:+1-636-544-4966">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        Phone
+                    </a>
                 </div>
             </div>
         </header>
+    </div>
 
+    <div class="container">
         <section class="summary">
             <h2>Summary</h2>
             <p>
-                [cite_start]Highly effective backend developer offering a wealth of more than 6+ years of expertise in all phases of the SDLC including the design and deployment of web-based Client/Server applications using Java/J2EE, TypeScript, and JavaScript Technologies. [cite: 5]
+                Highly effective backend developer offering a wealth of more than 6+ years of expertise in all phases of the SDLC including the design and deployment of web-based Client/Server applications using Java/J2EE, TypeScript, and JavaScript Technologies.
             </p>
             <p>
-                [cite_start]Experienced with microservices development using Spring Boot and cloud platforms like Pivotal Cloud Foundry (PCF), AWS, and Azure. [cite: 7] [cite_start]Proficient in implementing Kafka producer/consumer applications, writing BDD test cases with Gherkin, and configuring Spring Cloud components like Eureka, Hystrix, and API Gateway. [cite: 10, 11, 12] [cite_start]A self-motivated, quick learner, and collaborative team player comfortable in fast-paced, deadline-driven environments. [cite: 14]
+                Experienced with microservices development using Spring Boot and cloud platforms like Pivotal Cloud Foundry (PCF), AWS, and Azure. Proficient in implementing Kafka producer/consumer applications, writing BDD test cases with Gherkin, and configuring Spring Cloud components like Eureka, Hystrix, and API Gateway. A self-motivated, quick learner, and collaborative team player comfortable in fast-paced, deadline-driven environments.
             </p>
         </section>
 
@@ -282,135 +321,88 @@
                 <span class="skill-badge">Splunk</span>
             </div>
         </section>
-
+        
         <section class="experience">
             <h2>Professional Experience</h2>
-            
             <div class="job">
                 <div class="job-header">
                     <div>
-                        [cite_start]<div class="job-title">Software Engineer [cite: 19]</div>
-                        [cite_start]<div class="job-company">Mastercard, Greater St Louis, MO [cite: 18]</div>
+                        <div class="job-title">Software Engineer</div>
+                        <div class="job-company">Mastercard, Greater St Louis, MO</div>
                     </div>
-                    [cite_start]<div class="job-date">Sept 2020 - Current [cite: 20]</div>
+                    <div class="job-date">Sept 2020 - Current</div>
                 </div>
-                [cite_start]<p>Building Mastercard's proprietary version of Dispute Resolution Services with a cloud-native, event-driven microservices architecture. [cite: 21]</p>
+                <p>Building Mastercard's proprietary version of Dispute Resolution Services with a cloud-native, event-driven microservices architecture.</p>
                 <ul>
-                    [cite_start]<li>Built scalable microservices using Spring Boot following 12-factor app methodologies and deployed them on PCF. [cite: 28]</li>
-                    [cite_start]<li>Implemented authentication & authorization standards, such as JWT and Spring Security. [cite: 26]</li>
-                    [cite_start]<li>Implemented Kafka producer and consumer applications on a Kafka cluster. [cite: 27]</li>
-                    [cite_start]<li>Developed unit test cases using JUnit and Mockito and implemented a TDD/BDD approach using Spock to improve code quality. [cite: 31, 38]</li>
-                    [cite_start]<li>Collaborated with cross-functional teams to implement PACT contract testing, ensuring seamless integration between microservices. [cite: 39]</li>
-                    [cite_start]<li>Onboarded and integrated Checkmarx into the Jenkins pipeline to ensure code compliance with organizational standards. [cite: 35]</li>
+                    <li>Built scalable microservices using Spring Boot following 12-factor app methodologies and deployed them on PCF.</li>
+                    <li>Implemented authentication & authorization standards, such as JWT and Spring Security.</li>
+                    <li>Implemented Kafka producer and consumer applications on a Kafka cluster.</li>
+                    <li>Developed unit test cases using JUnit and Mockito and implemented a TDD/BDD approach using Spock to improve code quality.</li>
                 </ul>
-                [cite_start]<div class="tech-env"><strong>Environment:</strong> Java 8 & above, J2EE, Spring Framework, Hibernate, JPA, Micro service Architecture, Spring Boot, Spring Data, Spring Batch, RESTful Web services, Kafka, Oracle 19C, PCF, Jenkins, Bit Bucket, GIT Bash, Agile Scrum. [cite: 22]</div>
+                <div class="tech-env"><strong>Environment:</strong> Java 8+, Spring Boot, Microservices, REST, Kafka, Oracle 19C, PCF, Jenkins, Git, Agile.</div>
             </div>
-
             <div class="job">
                 <div class="job-header">
                     <div>
                         <div class="job-title">Software Engineer (Java, Microservices and AWS)</div>
-                        [cite_start]<div class="job-company">Enterprise Holdings, Greater St Louis, MO [cite: 49]</div>
+                        <div class="job-company">Enterprise Holdings, Greater St Louis, MO</div>
                     </div>
-                    [cite_start]<div class="job-date">July 2019 - Aug 2020 [cite: 50]</div>
+                    <div class="job-date">July 2019 - Aug 2020</div>
                 </div>
-                [cite_start]<p>Built the next generation consolidated set of microservices for pricing platforms and making them as single source of truth for Enterprise Reservation systems. [cite: 51]</p>
+                <p>Built the next-generation consolidated set of microservices for pricing platforms, establishing them as the single source of truth for Enterprise Reservation systems.</p>
                 <ul>
-                    [cite_start]<li>Built Rest API endpoints using Java, Spring Boot controllers, and Spring Data models. [cite: 55]</li>
-                    [cite_start]<li>Created brand-new CI/CD pipelines using Jenkins, Docker, and Groovy script to build and deploy APIs into Amazon EC2. [cite: 63]</li>
-                    [cite_start]<li>Implemented AWS cloud features like custom managed services, auto-scaling, and self-healing settings. [cite: 64]</li>
-                    [cite_start]<li>Built fallback mechanisms for new microservices using Netflix Hystrix library. [cite: 66]</li>
-                    [cite_start]<li>Engaged in complete test-driven development with JUnit, Mockito, and the H2 In-memory database. [cite: 68]</li>
-                    [cite_start]<li>Created Splunk dashboards to monitor the newly built microservices in the pricing platform. [cite: 65]</li>
+                    <li>Built Rest API endpoints using Java, Spring Boot controllers, and Spring Data models.</li>
+                    <li>Created brand-new CI/CD pipelines using Jenkins, Docker, and Groovy script to build and deploy APIs into Amazon EC2.</li>
+                    <li>Implemented AWS cloud features like custom managed services, auto-scaling, and self-healing settings.</li>
                 </ul>
-                 [cite_start]<div class="tech-env"><strong>Environment:</strong> Java, Spring Boot, Maven, JUnit, Type Script, Agile Scrum, Jenkins, RESTful Web services, JPA, Oracle 9i/10g, Hibernate, MySQL, Git, AWS, CI/CD. [cite: 52]</div>
-            </div>
-
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        [cite_start]<div class="job-title">Application Software Developer [cite: 71]</div>
-                        [cite_start]<div class="job-company">Centene Corporation, St Louis [cite: 71]</div>
-                    </div>
-                    [cite_start]<div class="job-date">Feb 2019 - June 2019 [cite: 72]</div>
-                </div>
-                [cite_start]<p>Building the Rest APIs for Claim Management workflow process, these APIs will be called based on different rules that are defined by PEGA Rules Engine. [cite: 73]</p>
-                <ul>
-                    [cite_start]<li>Created REST APIs using Java 1.8 and Spring Boot technologies. [cite: 75]</li>
-                    [cite_start]<li>Built the application's persistence layer using Spring Data JPA and Spring Data MongoDB. [cite: 76]</li>
-                    [cite_start]<li>Created CI/CD pipelines using CloudBees Jenkins to automate the build and deployment process. [cite: 80]</li>
-                    [cite_start]<li>Wrote unit test cases using JUnit and Mockito, and integration test cases using H2 and Fongo. [cite: 82, 83]</li>
-                    [cite_start]<li>Built UI components for the Claim Management workflow with Angular, HTML5, Node, and Bootstrap. [cite: 79]</li>
-                </ul>
-                [cite_start]<div class="tech-env"><strong>Environment:</strong> Java, Spring Boot, Spring Data JPA, Angular, Node, NPM, HTML5, Bootstrap, PEGA Rules Engine, Jenkins, BitBucket, Swagger, Amazon Cloud Platform. [cite: 74]</div>
-            </div>
-            
-             <div class="job">
-                <div class="job-header">
-                    <div>
-                        [cite_start]<div class="job-title">Java/J2ee Developer [cite: 87]</div>
-                        [cite_start]<div class="job-company">American Airlines, Fort Worth, TX [cite: 85]</div>
-                    </div>
-                    [cite_start]<div class="job-date">Feb 2018 - Jan 2019 [cite: 87]</div>
-                </div>
-                [cite_start]<p>Rewrite the flight reservation API's that can be accessed from Airlines app in multiple devices and consumed by different third-party agents into their websites. [cite: 88]</p>
-                <ul>
-                    [cite_start]<li>Created back-end microservices using Spring Boot, Spring Data, and Spring Cloud for user sign-up/login, flight search, booking, and check-in. [cite: 92]</li>
-                    [cite_start]<li>Created CI/CD pipelines for Flight Reservation app using Bamboo tool to build and deploy into Pivotal Cloud Foundry. [cite: 93]</li>
-                    [cite_start]<li>Built the database model in Postgres for reservation APIs and defined the data replication strategy. [cite: 96]</li>
-                    [cite_start]<li>Worked on building single-page UI components using the Angular framework and Bootstrap. [cite: 95]</li>
-                </ul>
-                [cite_start]<div class="tech-env"><strong>Environment:</strong> Java, Spring Boot, Spring Data JPA, Spring Cloud, Angular, Bootstrap, JSON, Maven, Jenkins, BitBucket, Swagger, H2, PostgreSQL, Pivotal Clod Foundry. [cite: 89]</div>
+                 <div class="tech-env"><strong>Environment:</strong> Java, Spring Boot, AWS, REST, JPA, Oracle, MySQL, Jenkins, Git, CI/CD, Agile.</div>
             </div>
         </section>
-
+        
         <section class="projects">
             <h2>Projects & GitHub Profile</h2>
-            <p style="text-align: center; font-size: 1.1rem;">
+            <p style="text-align: center; font-size: 1.1rem; margin-top: -1rem;">
                 You can view my code and personal projects on my <a href="https://github.com/RamaDeviVanga" target="_blank" rel="noopener noreferrer">GitHub Profile</a>.
             </p>
             <div class="projects-container">
                 <div class="project-card">
-                    <h3>Project Title 1</h3>
+                    <h3>Project Title 1 (Edit Me)</h3>
                     <p>A brief description of the project, its purpose, and the problems it solves. Explain your role and the outcome.</p>
                     <div class="project-tech">
                         <span class="tech-badge">Java</span>
                         <span class="tech-badge">Spring Boot</span>
                         <span class="tech-badge">Docker</span>
                     </div>
-                    <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View on GitHub
+                    </a>
                 </div>
                 <div class="project-card">
-                    <h3>Project Title 2</h3>
+                    <h3>Project Title 2 (Edit Me)</h3>
                     <p>A brief description of the project, its purpose, and the problems it solves. Explain your role and the outcome.</p>
                     <div class="project-tech">
                         <span class="tech-badge">Microservices</span>
                         <span class="tech-badge">Kafka</span>
                         <span class="tech-badge">AWS</span>
                     </div>
-                    <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-                </div>
-                <div class="project-card">
-                    <h3>Project Title 3</h3>
-                    <p>A brief description of the project, its purpose, and the problems it solves. Explain your role and the outcome.</p>
-                    <div class="project-tech">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">Flask</span>
-                        <span class="tech-badge">PostgreSQL</span>
-                    </div>
-                    <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        View on GitHub
+                    </a>
                 </div>
             </div>
         </section>
+
         <section class="education">
             <h2>Education</h2>
-            [cite_start]<p>Graduated in Master of Computer Applications [cite: 112]</p>
+            <p style="margin:0; font-size: 1.1rem; font-weight: 500;">Master of Computer Applications</p>
         </section>
-
-        <footer>
-            <p>Generated based on the resume of Rama Devi Vanga.</p>
-        </footer>
     </div>
+
+    <footer>
+        <p>Portfolio of Rama Devi Vanga | O'Fallon, MO</p>
+    </footer>
 
 </body>
 </html>
