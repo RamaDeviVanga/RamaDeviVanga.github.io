@@ -49,33 +49,6 @@
             line-height: 1.7;
             font-weight: 300;
             transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: none;
-        }
-
-        .cursor-dot, .cursor-outline {
-            pointer-events: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
-        }
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--secondary-color);
-        }
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--secondary-color);
-            transition: width 0.3s ease, height 0.3s ease, border 0.3s ease, transform 0.1s linear;
-        }
-        body:hover .cursor-dot, body:hover .cursor-outline {
-            opacity: 1;
         }
 
         .header-wrapper {
@@ -232,9 +205,6 @@
         footer { text-align: center; padding: 3rem 0 2rem; font-size: 0.9rem; color: #999; }
 
         /* Standardized Hover states for interactive elements */
-        a, .skill-badge, .repo-link, .theme-switch-wrapper {
-            cursor: none;
-        }
         .contact-info a:hover {
             transform: scale(1.1);
         }
@@ -299,8 +269,6 @@
         }
 
         @media (max-width: 768px) {
-            body { cursor: auto; }
-            .cursor-dot, .cursor-outline { display: none; }
             .header-wrapper { padding: 3rem 1rem; }
             .header-text h1 { font-size: 2.5rem; }
             .header-text p { font-size: 1.1rem; }
@@ -316,8 +284,6 @@
     </style>
 </head>
 <body>
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
 
     <div class="header-wrapper">
         <div class="theme-switch-wrapper">
@@ -531,34 +497,6 @@
                 }
             }
             type();
-
-            // --- Custom Cursor ---
-            const cursorDot = document.querySelector('.cursor-dot');
-            const cursorOutline = document.querySelector('.cursor-outline');
-            window.addEventListener('mousemove', (e) => {
-                const posX = e.clientX;
-                const posY = e.clientY;
-
-                cursorDot.style.left = `${posX}px`;
-                cursorDot.style.top = `${posY}px`;
-                
-                cursorOutline.animate({
-                    left: `${posX}px`,
-                    top: `${posY}px`
-                }, { duration: 500, fill: "forwards"});
-            });
-
-            const interactiveElements = document.querySelectorAll('a, .skill-badge, .theme-switch');
-            interactiveElements.forEach(el => {
-                el.addEventListener('mouseover', () => {
-                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    cursorOutline.style.borderColor = 'var(--primary-color)';
-                });
-                el.addEventListener('mouseout', () => {
-                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-                     cursorOutline.style.borderColor = 'var(--secondary-color)';
-                });
-            });
 
             // --- Scroll Animations ---
             const sections = document.querySelectorAll('section');
